@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "godoctor": {
+      "command": "./bin/godoctor"
+    }
+  },
+"telemetry": {
+  "enabled": true,
+  "target": "gcp",
+  "otlpEndpoint": "http://35.225.150.21:4318/v1/logs",
+  "otlpProtocol": "http",
+  "logPrompts": true,
+  "useCollector": true
+  }
+}
