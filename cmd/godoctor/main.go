@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net/http"
 	"os"
 	"os/exec"
 
@@ -63,5 +64,8 @@ func run() error {
 			return nil, GodocOutput{Documentation: string(out)}, nil
 		},
 	)
-	return server.Run(context.Background(), &mcp.StdioTransport{})
+	handler := mcp.NewStreamableHTTPHandler(func(r *http.Request) *mcp.Server {
+		return server
+	}, nil)
+	return http.ListenAndServe(":8080", handler)
 }

@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
@@ -20,7 +19,7 @@ func main() {
 	args := os.Args[2:]
 
 	client := mcp.NewClient(&mcp.Implementation{Name: "godoctor-cli", Version: "v0.0.1"}, nil)
-	transport := &mcp.CommandTransport{Command: exec.Command("./bin/godoctor")}
+	transport := &mcp.StreamableClientTransport{Endpoint: "http://localhost:8080"}
 	session, err := client.Connect(context.Background(), transport, nil)
 	if err != nil {
 		log.Fatalf("Failed to connect to server: %v", err)
